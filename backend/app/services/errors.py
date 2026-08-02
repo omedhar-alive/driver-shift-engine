@@ -1,0 +1,2 @@
+class OCRRetakeRequiredError(ValueError):
+    pass

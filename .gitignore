@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Env files (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Credentials / service account keys
+*service-account*.json
+*credentials*.json
+append-ocr-value-to-gs-*.json
+
+# User uploads
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
