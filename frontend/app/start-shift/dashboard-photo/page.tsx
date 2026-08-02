@@ -68,12 +68,12 @@ export default function StartShiftDashboardPhotoPage() {
     }
 
     if (!plateNumber) {
-      setErrorMessage("رقم اللوحة غير موجود.");
+      setErrorMessage("Plate number is missing.");
       return;
     }
 
     if (!dashboardImage) {
-      setErrorMessage("يرجى اختيار صورة للتابلوه.");
+      setErrorMessage("Please select a dashboard photo.");
       return;
     }
 
@@ -96,7 +96,7 @@ export default function StartShiftDashboardPhotoPage() {
       const uploadData = await uploadResponse.json();
 
       if (!uploadResponse.ok) {
-        setErrorMessage(uploadData.detail || "تعذر رفع الصورة.");
+        setErrorMessage(uploadData.detail || "Couldn't upload the photo.");
         return;
       }
 
@@ -118,20 +118,20 @@ export default function StartShiftDashboardPhotoPage() {
         const detail =
           typeof shiftStartData.detail === "string"
             ? shiftStartData.detail
-            : "تعذر بدء الوردية.";
+            : "Couldn't start the shift.";
 
         const requiresRetake = Boolean(shiftStartData.requires_retake);
 
         if (requiresRetake) {
           clearSelectedImage();
           setErrorMessage(
-            detail || "الصورة غير واضحة. يرجى التقاط صورة أوضح للتابلوه."
+            detail || "The photo isn't clear. Please take a clearer dashboard photo."
           );
           return;
         }
 
         if (detail.toLowerCase().includes("open shift")) {
-          setErrorMessage("لديك وردية نشطة بالفعل. جارٍ التحويل...");
+          setErrorMessage("You already have an active shift. Redirecting...");
           setTimeout(() => {
             router.replace("/home");
           }, 700);
@@ -144,10 +144,10 @@ export default function StartShiftDashboardPhotoPage() {
 
       if (shiftStartData.status === "pending_ocr_quota") {
         setSuccessMessage(
-          "خدمة OCR غير متاحة مؤقتًا. تم حفظ الطلب وسيتم معالجته قريبًا."
+          "OCR service is temporarily unavailable. Your request has been saved and will be processed shortly."
         );
       } else {
-        setSuccessMessage("تم بدء الوردية بنجاح.");
+        setSuccessMessage("Shift started successfully.");
       }
 
       saveShiftStartedSuccessfullyState();
@@ -155,7 +155,7 @@ export default function StartShiftDashboardPhotoPage() {
         router.replace("/home");
       }, 700);
     } catch {
-      setErrorMessage("تعذر الاتصال بالخادم.");
+      setErrorMessage("Could not connect to the server.");
     } finally {
       setIsSubmitting(false);
     }
@@ -170,22 +170,22 @@ export default function StartShiftDashboardPhotoPage() {
             onClick={handleLogout}
             className="mb-6 text-sm font-medium text-neutral-500 transition hover:text-black"
           >
-            تسجيل الخروج
+            Log Out
           </button>
 
           <p className="text-xs font-semibold tracking-wide text-neutral-500">
-            بدء الوردية · صورة التابلوه
+            Start Shift · Dashboard Photo
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            التقط صورة التابلوه
+            Take a Dashboard Photo
           </h1>
           <p className="mt-2 text-sm text-neutral-600">
-            التقط أو ارفع صورة واضحة للتابلوه لبدء الوردية.
+            Take or upload a clear dashboard photo to start the shift.
           </p>
         </div>
 
         <div className="mb-5 rounded-2xl border border-black/10 bg-neutral-50 p-4">
-          <p className="text-sm font-semibold text-black">رقم اللوحة</p>
+          <p className="text-sm font-semibold text-black">Plate Number</p>
           <p className="mt-1 text-sm text-neutral-600">{plateNumber}</p>
         </div>
 
@@ -195,7 +195,7 @@ export default function StartShiftDashboardPhotoPage() {
               htmlFor="dashboardPhoto"
               className="mb-2 block text-sm font-medium text-neutral-800"
             >
-              صورة التابلوه
+              Dashboard Photo
             </label>
 
             <input
@@ -214,19 +214,19 @@ export default function StartShiftDashboardPhotoPage() {
               onClick={() => fileInputRef.current?.click()}
               className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90"
             >
-              التقط صورة التابلوه
+              Take Dashboard Photo
             </button>
 
             {dashboardImage ? (
               <div className="mt-3 rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
-                <p className="text-sm font-medium text-green-700">تم اختيار الصورة بنجاح</p>
+                <p className="text-sm font-medium text-green-700">Photo selected successfully</p>
                 <p className="mt-1 text-xs text-green-600">{dashboardImage.name}</p>
               </div>
             ) : (
               <p className="mt-2 text-sm text-neutral-400">
                 {errorMessage
-                  ? "يرجى التقاط صورة أوضح للتابلوه لتفعيل زر الإرسال."
-                  : "لم يتم اختيار صورة بعد"}
+                  ? "Please take a clearer dashboard photo to enable the submit button."
+                  : "No photo selected yet"}
               </p>
             )}
           </div>
@@ -249,7 +249,7 @@ export default function StartShiftDashboardPhotoPage() {
             disabled={isSubmitting || !dashboardImage}
             className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? "جارٍ الإرسال..." : "ابدا الشيفت من هنا"}
+            {isSubmitting ? "Submitting..." : "Start Shift From Here"}
           </button>
         </div>
       </div>

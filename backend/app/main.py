@@ -6,12 +6,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.router import api_router
 from app.core.config import settings
 from app.db.init_db import init_db
+from app.db.seed import seed_demo_driver
 from app.workers.google_sheets_retry_worker import start_google_sheets_retry_worker
 from app.workers.pending_ocr_retry_worker import start_pending_ocr_retry_worker
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
+    if settings.seed_demo_driver:
+        seed_demo_driver()
     start_google_sheets_retry_worker()
     start_pending_ocr_retry_worker()
     yield

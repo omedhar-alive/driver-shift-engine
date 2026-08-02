@@ -60,7 +60,7 @@ export default function QrScanner({
         console.error("QR scanner start error:", error);
 
         if (!hasResolvedRef.current) {
-          onScanError?.("تعذر تشغيل ماسح QR.");
+          onScanError?.("Couldn't start the QR scanner.");
         }
       });
     }, 150);
@@ -96,7 +96,7 @@ export default function QrScanner({
       </div>
 
       <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 text-xs text-white">
-        وجّه QR داخل الإطار
+        Align QR within frame
       </div>
     </div>
   );

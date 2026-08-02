@@ -27,7 +27,7 @@ class GeminiOCRService:
                 "success": False,
                 "error_type": "file_not_found",
                 "requires_retake": False,
-                "message": "لم يتم العثور على صورة التابلوه.",
+                "message": "Dashboard photo not found.",
                 "raw_response": None,
             }
 
@@ -72,7 +72,7 @@ class GeminiOCRService:
 - لا تضف أي نص أو شرح خارج الـ JSON.
 - أعد القيم الرقمية كنصوص (Strings) داخل الكائن الخاص بها.
 - إذا تعذر تماماً العثور على أي سند بصري للرقم، أعد "null".
-- اجعل قيمة "failure_reason" باللغة العربية واشرح فيها "بناءً على أي قاعدة" تم الفشل (مثلاً: عدم وجود رقم داخل إطار البطارية).
+- Make the value of "failure_reason" in English and explain which rule caused the failure (e.g., no number found inside the battery icon frame).
 - في حقل "visual_reasoning_log" (إن وجد في السكيما)، اشرح بالإنجليزية كيف ميزت الرقم وتجاهلت المشتتات.
 
 كن دقيقاً وحازماً: قيمة الـ SOC في XPENG هي الرقم الصغير في أعلى الشاشة داخل البطارية، وليست الأرقام الكبيرة في المنتصف.
@@ -159,7 +159,7 @@ class GeminiOCRService:
                     "success": False,
                     "error_type": "ocr_unreadable",
                     "requires_retake": True,
-                    "message": failure_reason or "الصورة غير واضحة. يرجى إعادة تصوير التابلوه بشكل أوضح مع تقليل الانعكاس والتأكد من ظهور الأرقام بالكامل.",
+                    "message": failure_reason or "The photo isn't clear. Please retake the dashboard photo with less glare and make sure the numbers are fully visible.",
                     "raw_response": self._serialize_raw_response(parsed),
                 }
 
@@ -192,7 +192,7 @@ class GeminiOCRService:
                 "is_dashboard_clear": metadata.get("is_dashboard_clear", False),
                 "failure_reason": failure_reason,
                 "requires_retake": False,
-                "message": "تمت قراءة صورة التابلوه بنجاح",
+                "message": "Dashboard photo read successfully",
                 "raw_response": self._serialize_raw_response(parsed),
             }
 
@@ -221,7 +221,7 @@ class GeminiOCRService:
                     "success": False,
                     "error_type": "rate_limited",
                     "requires_retake": False,
-                    "message": "خدمة OCR مشغولة مؤقتًا. سيتم معالجة الطلب قريبًا.",
+                    "message": "OCR service is temporarily busy. Your request will be processed shortly.",
                     "raw_response": None,
                 }
 
@@ -230,7 +230,7 @@ class GeminiOCRService:
                     "success": False,
                     "error_type": "provider_unavailable",
                     "requires_retake": False,
-                    "message": "خدمة OCR غير متاحة مؤقتًا. سيتم معالجة الطلب قريبًا.",
+                    "message": "OCR service is temporarily unavailable. Your request will be processed shortly.",
                     "raw_response": None,
                 }
 
@@ -239,7 +239,7 @@ class GeminiOCRService:
                     "success": False,
                     "error_type": "quota_exhausted",
                     "requires_retake": False,
-                    "message": "خدمة OCR غير متاحة مؤقتًا. سيتم معالجة الطلب قريبًا.",
+                    "message": "OCR service is temporarily unavailable. Your request will be processed shortly.",
                     "raw_response": None,
                 }
 
@@ -247,7 +247,7 @@ class GeminiOCRService:
                 "success": False,
                 "error_type": "ocr_failed",
                 "requires_retake": False,
-                "message": "تعذر تحليل الصورة حاليًا. حاول مرة أخرى لاحقًا.",
+                "message": "Couldn't analyze the photo right now. Please try again later.",
                 "raw_response": None,
             }
 

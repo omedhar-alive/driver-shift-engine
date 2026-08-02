@@ -30,24 +30,24 @@ export default function EndShiftPage() {
               onClick={handleLogout}
               className="text-sm font-medium text-neutral-500 transition hover:text-black"
             >
-              تسجيل الخروج
+              Log Out
             </button>
             <button
               type="button"
               onClick={() => router.push("/home")}
               className="text-sm font-medium text-neutral-500 transition hover:text-black"
             >
-              رجوع
+              Back
             </button>
           </div>
 
           <div className="mb-8">
             <p className="text-xs font-semibold tracking-wide text-neutral-500">
-              إنهاء الوردية
+              End Shift
             </p>
-            <h1 className="mt-2 text-3xl font-bold tracking-tight">إنهاء الوردية</h1>
+            <h1 className="mt-2 text-3xl font-bold tracking-tight">End Shift</h1>
             <p className="mt-3 text-sm text-neutral-600">
-              اضغط للانتقال إلى تأكيد إنهاء الوردية ثم استكمال الخطوات.
+              Tap to confirm ending your shift and complete the steps.
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function EndShiftPage() {
           onClick={() => router.push("/end-shift/confirm")}
           className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90"
         >
-          إنهاء الوردية
+          End Shift
         </button>
       </div>
     </main>

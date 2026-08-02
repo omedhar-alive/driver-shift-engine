@@ -57,7 +57,7 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setErrorMessage(data.detail || "فشل تسجيل الدخول.");
+        setErrorMessage(data.detail || "Login failed.");
         return;
       }
 
@@ -68,7 +68,7 @@ export default function LoginPage() {
       const nextRoute = await resolveLatestDriverRoute();
       router.push(nextRoute);
     } catch {
-      setErrorMessage("تعذر الاتصال بالخادم.");
+      setErrorMessage("Could not connect to the server.");
     } finally {
       setIsSubmitting(false);
     }
@@ -99,9 +99,9 @@ export default function LoginPage() {
               className="mb-6 h-auto w-40"
               priority
             />
-            <h1 className="text-3xl font-bold tracking-tight">تسجيل دخول السائق</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Driver Login</h1>
             <p className="mt-2 text-sm text-neutral-600">
-              سجّل الدخول لبدء أو إنهاء الوردية.
+              Log in to start or end your shift.
             </p>
           </div>
 
@@ -111,13 +111,13 @@ export default function LoginPage() {
                 htmlFor="driverCode"
                 className="mb-2 block text-sm font-medium text-neutral-800"
               >
-                كود السائق
+                Driver Code
               </label>
               <input
                 id="driverCode"
                 name="driverCode"
                 type="text"
-                placeholder="أدخل كود السائق"
+                placeholder="Enter driver code"
                 value={driverCode}
                 onChange={(event) => setDriverCode(event.target.value)}
                 className="w-full rounded-2xl border border-black/15 px-4 py-4 text-base outline-none transition focus:border-black"
@@ -130,13 +130,13 @@ export default function LoginPage() {
                 htmlFor="password"
                 className="mb-2 block text-sm font-medium text-neutral-800"
               >
-                كلمة المرور
+                Password
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
-                placeholder="أدخل كلمة المرور"
+                placeholder="Enter password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full rounded-2xl border border-black/15 px-4 py-4 text-base outline-none transition focus:border-black"
@@ -151,7 +151,7 @@ export default function LoginPage() {
                 checked={rememberMe}
                 onChange={(event) => setRememberMe(event.target.checked)}
               />
-              <span>تذكرني</span>
+              <span>Remember me</span>
             </label>
 
             {errorMessage ? (
@@ -165,7 +165,7 @@ export default function LoginPage() {
               disabled={isSubmitting}
               className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+              {isSubmitting ? "Logging in..." : "Log In"}
             </button>
           </form>
         </div>

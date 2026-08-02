@@ -26,7 +26,7 @@ export default function HomePage() {
 
       router.replace(nextRoute);
     } catch {
-      setErrorMessage("تعذر تحديد حالة الوردية الآن.");
+      setErrorMessage("Couldn't determine shift status right now.");
     } finally {
       setIsLoading(false);
     }
@@ -71,15 +71,15 @@ export default function HomePage() {
             onClick={handleLogout}
             className="mb-6 text-sm font-medium text-neutral-500 transition hover:text-black"
           >
-            تسجيل الخروج
+            Log Out
           </button>
 
           <p className="text-xs font-semibold tracking-wide text-neutral-500">
-            الصفحة الرئيسية
+            Home
           </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight">جارٍ تحديد حالتك الحالية</h1>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight">Determining your current status</h1>
           <p className="mt-3 text-sm text-neutral-600">
-            سيتم توجيهك تلقائيًا إلى الخطوة المناسبة.
+            You&apos;ll be redirected to the right step automatically.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export default function HomePage() {
               onClick={loadHomeData}
               className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90"
             >
-              إعادة المحاولة
+              Retry
             </button>
 
             <button
@@ -102,7 +102,7 @@ export default function HomePage() {
               onClick={handleLogout}
               className="w-full rounded-2xl border border-black/15 px-4 py-4 text-base font-medium text-black transition hover:bg-neutral-50"
             >
-              تسجيل الخروج
+              Log Out
             </button>
           </div>
         ) : null}

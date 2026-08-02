@@ -60,20 +60,20 @@ export default function StartShiftScanPage() {
         const data = await response.json();
 
         if (!response.ok) {
-          setErrorMessage("تعذر التحقق من السيارة.");
+          setErrorMessage("Couldn't verify the car.");
           restartScannerWithDelay();
           return;
         }
 
         if (!data.is_valid || !data.plate_number) {
-          setErrorMessage("هذه السيارة غير مسجلة في الأسطول. حاول مرة أخرى.");
+          setErrorMessage("This car isn't registered in the fleet. Please try again.");
           restartScannerWithDelay();
           return;
         }
 
         continueWithPlate(data.plate_number);
       } catch {
-        setErrorMessage("تعذر الاتصال بالخادم.");
+        setErrorMessage("Could not connect to the server.");
         restartScannerWithDelay();
       } finally {
         setIsValidating(false);
@@ -113,7 +113,7 @@ export default function StartShiftScanPage() {
               onClick={handleLogout}
               className="text-sm font-medium text-neutral-500 transition hover:text-black"
             >
-              تسجيل الخروج
+              Log Out
             </button>
 
             <button
@@ -121,18 +121,18 @@ export default function StartShiftScanPage() {
               onClick={() => router.push("/start-shift")}
               className="text-sm font-medium text-neutral-500 transition hover:text-black"
             >
-              رجوع
+              Back
             </button>
           </div>
 
           <p className="text-xs font-semibold tracking-wide text-neutral-500">
-            بدء الوردية · مسح السيارة
+            Start Shift · Scan Car
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            امسح QR السيارة
+            Scan the Car&apos;s QR Code
           </h1>
           <p className="mt-2 text-sm text-neutral-600">
-            وجّه الكاميرا نحو QR الخاص بالسيارة للمتابعة.
+            Point the camera at the car&apos;s QR code to continue.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function StartShiftScanPage() {
 
           {isValidating ? (
             <div className="rounded-2xl border border-black/10 bg-neutral-50 px-4 py-3 text-sm text-neutral-700">
-              جاري التحقق من السيارة...
+              Verifying the car...
             </div>
           ) : null}
 

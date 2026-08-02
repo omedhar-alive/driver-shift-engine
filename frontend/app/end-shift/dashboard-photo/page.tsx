@@ -120,7 +120,7 @@ export default function EndShiftDashboardPhotoPage() {
     }
 
     if (!dashboardImage) {
-      setErrorMessage("يرجى التقاط صورة التابلوه أولاً.");
+      setErrorMessage("Please take a dashboard photo first.");
       return;
     }
 
@@ -146,12 +146,12 @@ export default function EndShiftDashboardPhotoPage() {
       } | null;
 
       if (!uploadResponse.ok) {
-        setErrorMessage(uploadData?.detail || "تعذر رفع الصورة.");
+        setErrorMessage(uploadData?.detail || "Couldn't upload the photo.");
         return;
       }
 
       if (!uploadData?.file_path) {
-        setErrorMessage("تعذر رفع الصورة.");
+        setErrorMessage("Couldn't upload the photo.");
         return;
       }
 
@@ -177,14 +177,14 @@ export default function EndShiftDashboardPhotoPage() {
         const detail =
           typeof shiftEndData?.detail === "string"
             ? shiftEndData.detail
-            : "تعذر إنهاء الوردية.";
+            : "Couldn't end the shift.";
 
         const requiresRetake = Boolean(shiftEndData?.requires_retake);
 
         if (requiresRetake) {
           clearSelectedImage();
           setErrorMessage(
-            detail || "الصورة غير واضحة. يرجى التقاط صورة أوضح للتابلوه."
+            detail || "The photo isn't clear. Please take a clearer dashboard photo."
           );
           return;
         }
@@ -194,13 +194,13 @@ export default function EndShiftDashboardPhotoPage() {
       }
 
       if (shiftEndData?.already_processed) {
-        setSuccessMessage("تم إنهاء الوردية بالفعل. جارٍ التحويل...");
+        setSuccessMessage("Shift already ended. Redirecting...");
       } else if (shiftEndData?.status === "pending_ocr_quota") {
         setSuccessMessage(
-          "خدمة OCR غير متاحة مؤقتًا. تم حفظ الطلب وسيتم معالجته قريبًا."
+          "OCR service is temporarily unavailable. Your request has been saved and will be processed shortly."
         );
       } else {
-        setSuccessMessage("تم إنهاء الوردية بنجاح.");
+        setSuccessMessage("Shift ended successfully.");
       }
 
       saveShiftEndedSuccessfullyState();
@@ -211,7 +211,7 @@ export default function EndShiftDashboardPhotoPage() {
       const endShiftLikelySucceeded = await verifyEndShiftState(token);
 
       if (endShiftLikelySucceeded) {
-        setSuccessMessage("تم إنهاء الوردية بالفعل. جارٍ التحويل...");
+        setSuccessMessage("Shift already ended. Redirecting...");
         saveShiftEndedSuccessfullyState();
         setTimeout(() => {
           router.replace("/home");
@@ -219,7 +219,7 @@ export default function EndShiftDashboardPhotoPage() {
         return;
       }
 
-      setErrorMessage("تعذر تأكيد الإرسال. يرجى المحاولة مرة أخرى.");
+      setErrorMessage("Couldn't confirm the submission. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -234,17 +234,17 @@ export default function EndShiftDashboardPhotoPage() {
             onClick={handleLogout}
             className="mb-6 text-sm font-medium text-neutral-500 transition hover:text-black"
           >
-            تسجيل الخروج
+            Log Out
           </button>
 
           <p className="text-xs font-semibold tracking-wide text-neutral-500">
-            إنهاء الوردية · صورة التابلوه
+            End Shift · Dashboard Photo
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            التقط صورة التابلوه
+            Take a Dashboard Photo
           </h1>
           <p className="mt-2 text-sm text-neutral-600">
-            التقط أو ارفع صورة واضحة للتابلوه لإنهاء الوردية.
+            Take or upload a clear dashboard photo to end the shift.
           </p>
         </div>
 
@@ -254,7 +254,7 @@ export default function EndShiftDashboardPhotoPage() {
               htmlFor="dashboardPhoto"
               className="mb-2 block text-sm font-medium text-neutral-800"
             >
-              صورة التابلوه
+              Dashboard Photo
             </label>
 
             <input
@@ -273,19 +273,19 @@ export default function EndShiftDashboardPhotoPage() {
               onClick={() => fileInputRef.current?.click()}
               className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90"
             >
-              التقط صورة التابلوه
+              Take Dashboard Photo
             </button>
 
             {dashboardImage ? (
               <div className="mt-3 rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
                 <p className="text-sm font-medium text-green-700">
-                  تم اختيار الصورة بنجاح
+                  Photo selected successfully
                 </p>
                 <p className="mt-1 text-xs text-green-600">{dashboardImage.name}</p>
               </div>
             ) : (
               <p className="mt-2 text-sm text-neutral-400">
-                لم يتم اختيار صورة بعد
+                No photo selected yet
               </p>
             )}
           </div>
@@ -308,7 +308,7 @@ export default function EndShiftDashboardPhotoPage() {
             disabled={isSubmitting || !dashboardImage}
             className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? "جارٍ الإرسال..." : "انهي الشيفت من هنا"}
+            {isSubmitting ? "Submitting..." : "End Shift From Here"}
           </button>
         </div>
       </div>

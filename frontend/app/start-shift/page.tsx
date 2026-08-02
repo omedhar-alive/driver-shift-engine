@@ -30,24 +30,24 @@ export default function StartShiftPage() {
               onClick={handleLogout}
               className="text-sm font-medium text-neutral-500 transition hover:text-black"
             >
-              تسجيل الخروج
+              Log Out
             </button>
             <button
               type="button"
               onClick={() => router.push("/home")}
               className="text-sm font-medium text-neutral-500 transition hover:text-black"
             >
-              رجوع
+              Back
             </button>
           </div>
 
           <div className="mb-8">
             <p className="text-xs font-semibold tracking-wide text-neutral-500">
-              بدء الوردية
+              Start Shift
             </p>
-            <h1 className="mt-2 text-3xl font-bold tracking-tight">ابدأ الشيفت</h1>
+            <h1 className="mt-2 text-3xl font-bold tracking-tight">Start Your Shift</h1>
             <p className="mt-3 text-sm text-neutral-600">
-              اضغط للانتقال إلى مسح QR السيارة ثم استكمال خطوات بدء الوردية.
+              Tap to scan the car&apos;s QR code and complete the shift-start steps.
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function StartShiftPage() {
           onClick={() => router.push("/start-shift/scan")}
           className="w-full rounded-2xl bg-black px-4 py-4 text-base font-semibold text-white transition hover:opacity-90"
         >
-          ابدا الشيفت
+          Start Shift
         </button>
       </div>
     </main>

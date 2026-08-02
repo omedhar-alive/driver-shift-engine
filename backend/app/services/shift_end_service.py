@@ -131,7 +131,7 @@ class ShiftEndService:
             raise ValueError(gemini_result["message"])
 
         if gemini_result["odo_confidence"] < 0.85 or gemini_result["soc_confidence"] < 0.85:
-            message = "الصورة غير واضحة بما يكفي. يرجى التقاط صورة أوضح للتابلوه ثم المحاولة مرة أخرى."
+            message = "The photo isn't clear enough. Please take a clearer dashboard photo and try again."
             self.shift_exception_service.create_exception(
                 db=db,
                 exception_type="ocr_low_confidence",
